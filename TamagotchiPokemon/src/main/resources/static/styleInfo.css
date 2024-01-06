@@ -1,0 +1,48 @@
+body {
+    background-color: #696969;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigation {
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+    font-size: 40px;
+    font-family: 'Angkor', serif;
+    padding: 0px 10px 0px 10px;
+    color: black;
+}
+
+h1 {
+    font-family: 'Angkor', serif;
+    font-size: 60px;
+    margin: 0px 30px;
+}
+
+p {
+    font-family: 'Angkor', serif;
+    margin-right: 30px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+}
+
+.attacks {
+    display: flex;
+    justify-content: left;
+}

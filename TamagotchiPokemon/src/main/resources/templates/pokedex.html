@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pokedex</title>
-    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Nunito+Sans:opsz@6..12&display=swap"
@@ -24,8 +24,10 @@
 </div>
 <div class="container">
     <div class="allPokemons">
-        <div th:each="pokemon : ${user.getCurrentPokemons()}" class="onePokemon">
-            <img th:src="${pokemon.getImage()}" width="205" height="205"><br>
+        <div th:each="pokemon : ${pokemonList}" class="onePokemon">
+            <a th:href="|/${pokemon.getId()}/info|">
+                <img th:src="|/${pokemon.getImage()}|" width="205" height="205"><br>
+            </a>
         </div>
     </div>
 </div>

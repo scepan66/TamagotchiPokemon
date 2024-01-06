@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PokemonService {
@@ -61,7 +63,7 @@ public class PokemonService {
     public void createNewUser(UserDTO userDTO) {
         User newUser = new User(userDTO.getUsername());
         userRepository.save(newUser);
-        for (BasicPokemon basicPokemon: starters) {
+        for (BasicPokemon basicPokemon: starters.stream().sorted(Comparator.comparing(BasicPokemon::getEvolveStage)).toList()) {
             Pokemon newPokemon = new Pokemon(basicPokemon.getName(), basicPokemon.getImage(), basicPokemon.getHealth(), basicPokemon.getExperience(), basicPokemon.getEvolveStage(), basicPokemon.getHunger(), newUser);
             pokemonRepository.save(newPokemon);
             for (BasicAttack basicAttack: basicPokemon.getAttacks()) {
@@ -69,5 +71,9 @@ public class PokemonService {
                 attackRepository.save(attack);
             }
         }
+    }
+
+    public Pokemon getPokemonById(Long id) {
+        return pokemonRepository.getPokemonById(id);
     }
 }

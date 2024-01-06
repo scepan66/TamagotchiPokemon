@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pokemon.getName()}"></title>
+    <link rel="stylesheet" href="/styleinfo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Nunito+Sans:opsz@6..12&display=swap"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div class="header">
+    <h1 th:text="${pokemon.getName()}"></h1>
+    <div class="navigation">
+        <span><a th:if="|${pokemon.getId() != pokemonList.get(0).getId()}|"
+                 th:href="|/${pokemon.getId() - 1}/info|"><</a></span>
+        <a href="/pokedex">Home</a>
+        <a th:if="|${pokemon.getId() != pokemonList.get(pokemonList.size()-1).getId()}|"
+           th:href="|/${pokemon.getId() + 1}/info|">></a>
+    </div>
+</div>
+<div class="container">
+    <div class="image">
+        <img th:src="|/${pokemon.getImage()}|" width="400" height="400" th:alt="${pokemon.getName()}">
+    </div>
+    <div class="description">
+        <p th:text="|Health: ${pokemon.getHealth()}|"></p>
+        <div class="attacks">
+            <p>Attacks:</p>
+            <div class="attack" th:each="attack : ${pokemon.getAttacks()}">
+                <p th:text="${attack.getName()}"></p>
+                <p th:text="${attack.getDescription()}"></p>
+                <p th:text="|Damage: ${attack.getDamage()}|"></p>
+            </div>
+        </div>
+        <p th:text="|Experience: ${pokemon.getExperience()}|"></p>
+        <p th:text="|Hunger: ${pokemon.getHunger()}|"></p>
+    </div>
+</div>
+</body>
+</html>

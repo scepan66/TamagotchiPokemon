@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<h1>Hi trainer, ready to catch some Pokémons?</h1>
+<p>Please provide a name, so i can provide u with the collection of your pokemons!</p>
+<form method="POST" action="/login">
+    <label for="name">Name</label>
+    <input type="text" name="username" id="name" required minlength=1>
+    <input type="submit" value="GO">
+</form>
+</body>
+</html>

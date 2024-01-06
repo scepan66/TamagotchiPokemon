@@ -1,61 +1,26 @@
-package com.tamagotchipokemon.models;
+package com.tamagotchipokemon.models.DTOs;
 
-import jakarta.persistence.*;
+import com.tamagotchipokemon.models.Attack;
 
 import java.util.Set;
 
-@Entity
-@Table(name = "pokemons")
-public class Pokemon {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class BasicPokemon {
     private String name;
     private String image;
     private int health;
     private int experience;
     private int evolveStage;
     private int hunger;
-    @OneToMany(mappedBy = "pokemon")
-    private Set<Attack> attacks;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Set<BasicAttack> attacks;
 
-    public Pokemon(String name, String image, int health, int experience, int evolveStage, int hunger, User user) {
+    public BasicPokemon(String name, String image, int health, int experience, int evolveStage, int hunger, Set<BasicAttack> attacks) {
         this.name = name;
         this.image = image;
         this.health = health;
         this.experience = experience;
         this.evolveStage = evolveStage;
         this.hunger = hunger;
-        this.user = user;
-    }
-
-    public Pokemon() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Set<Attack> getAttacks() {
-        return attacks;
-    }
-
-    public void setAttacks(Set<Attack> attacks) {
         this.attacks = attacks;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getName() {
@@ -104,5 +69,13 @@ public class Pokemon {
 
     public void setHunger(int hunger) {
         this.hunger = hunger;
+    }
+
+    public Set<BasicAttack> getAttacks() {
+        return attacks;
+    }
+
+    public void setAttacks(Set<BasicAttack> attacks) {
+        this.attacks = attacks;
     }
 }

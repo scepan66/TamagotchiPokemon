@@ -3,14 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Pokedex</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Nunito+Sans:opsz@6..12&display=swap"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>It's working!</h1>
-<form method="POST" action="/login">
-    <label for="name">Name</label>
-    <input type="text" name="username" id="name" required minlength=1>
-    <input type="submit" value="GO">
-</form>
+<div class="header">
+    <h1 th:text="|Hello ${user.getUsername()}! Which pokemon will u choose?|"></h1>
+    <div class="searchbar">
+        <form method="POST" action="/search">
+            <input type="text" id="search" name="search" placeholder="who's that Pokemon" required minlength="1">
+            <input type="submit" value="Search" id="button">
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="allPokemons">
+        <div th:each="pokemon : ${user.getCurrentPokemons()}" class="onePokemon">
+            <img th:src="${pokemon.getImage()}" width="205" height="205"><br>
+        </div>
+    </div>
+</div>
 </body>
 </html>

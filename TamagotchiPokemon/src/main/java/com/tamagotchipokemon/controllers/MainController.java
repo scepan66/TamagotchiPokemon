@@ -26,6 +26,11 @@ public class MainController {
     }
     @GetMapping("/pokedex")
     public String pokedex(Model model) {
+        User found = pokemonService.findUserByUsername(loggedInUser.getUsername());
+        if (found == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("user", found);
         return "pokedex";
     }
     @PostMapping("/login")

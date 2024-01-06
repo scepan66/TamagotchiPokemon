@@ -1,0 +1,41 @@
+body {
+    background-color: #696969;
+}
+
+input {
+    font-family: 'Angkor', serif;
+}
+
+h1 {
+    font-family: 'Angkor', serif;
+    font-size: 60px;
+    margin: 0;
+    text-align: center;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.allPokemons {
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.onePokemon {
+    width: 30%;
+}

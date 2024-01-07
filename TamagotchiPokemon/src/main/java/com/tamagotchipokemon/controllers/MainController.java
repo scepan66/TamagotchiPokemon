@@ -7,10 +7,8 @@ import com.tamagotchipokemon.services.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,5 +55,17 @@ public class MainController {
         model.addAttribute("pokemonList", pokemonService.findUserByUsername(loggedInUser.getUsername()).getCurrentPokemons().stream().sorted(Comparator.comparing(Pokemon::getId)).toList());
         model.addAttribute("pokemon", pokemonService.getPokemonById(id));
         return "info";
+    }
+
+    @PostMapping("/search")
+    public String search(Model model, @RequestParam String search, RedirectAttributes redirectAttributes) {
+        List<Pokemon> foundedPokemons = pokemonService.getPokemonsBySearchedParameter(search, pokemonService.findUserByUsername(loggedInUser.getUsername()).getCurrentPokemons().stream().sorted(Comparator.comparing(Pokemon::getId)).toList());
+        if(foundedPokemons.isEmpty()) {
+            redirectAttributes.addFlashAttribute("notFounded", true);
+            return "redirect:/pokedex";
+        }
+        model.addAttribute(foundedPokemons);
+        model.addAttribute("user", pokemonService.findUserByUsername(loggedInUser.getUsername()));
+        return "pokedex";
     }
 }

@@ -12,10 +12,7 @@ import com.tamagotchipokemon.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,5 +72,14 @@ public class PokemonService {
 
     public Pokemon getPokemonById(Long id) {
         return pokemonRepository.getPokemonById(id);
+    }
+
+    public List<Pokemon> getPokemonsBySearchedParameter(String search, List<Pokemon> pokemons) {
+        return pokemons.stream()
+                .filter(pokemon ->
+                        pokemon.getName().toLowerCase().contains(search) ||
+                                pokemon.getAttacks().stream().anyMatch(attack -> attack.getDescription().toLowerCase().contains(search))
+                )
+                .toList();
     }
 }

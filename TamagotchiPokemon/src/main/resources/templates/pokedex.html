@@ -15,6 +15,7 @@
 <body>
 <div class="header">
     <h1 th:text="|Hello ${user.getUsername()}! Which pokemon will u choose?|"></h1>
+    <h2 th:if="${notFounded} == true" style="text-align:center; color: red" >None of searched parameters matched the pokemons</h2>
     <div class="searchbar">
         <form method="POST" action="/search">
             <input type="text" id="search" name="search" placeholder="who's that Pokemon" required minlength="1">

@@ -99,5 +99,11 @@ public class MainController {
         redirectAttributes.addFlashAttribute("justEvolved", true);
         return "redirect:/" + newPokemon.getId() + "/info";
     }
-    
+
+    @GetMapping("/{id}/startAgain")
+    public String deleteLastEvolutionAndCreateNewPokemon(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Pokemon newPokemon = pokemonService.deletePokemonAndCreateNewOne(id);
+        redirectAttributes.addFlashAttribute("justEvolved", true);
+        return "redirect:/" + newPokemon.getId() + "/info";
+    }
 }

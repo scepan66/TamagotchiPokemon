@@ -137,4 +137,18 @@ public class PokemonService {
         return newPokemon;
     }
 
+    public Pokemon deletePokemonAndCreateNewOne(Long id) {
+        Pokemon pokemonToBeDeleted = pokemonRepository.getPokemonById(id);
+        User user = pokemonToBeDeleted.getUser();
+        BasicPokemon unsavedPokemon = starters.stream().filter(bp -> bp.getEvolveStage() == pokemonToBeDeleted.getEvolveStage()).findFirst().get();
+        Pokemon newPokemon = new Pokemon(unsavedPokemon.getName(), unsavedPokemon.getImage(), unsavedPokemon.getHealth(), unsavedPokemon.getExperience(), unsavedPokemon.getEvolveStage(), unsavedPokemon.getHunger(), user);
+        pokemonRepository.save(newPokemon);
+        for (BasicAttack basicAttack : unsavedPokemon.getAttacks()) {
+            Attack attack = new Attack(basicAttack.getName(), basicAttack.getDamage(), newPokemon, basicAttack.getDescription());
+            attackRepository.save(attack);
+        }
+        user.getCurrentPokemons().remove(pokemonToBeDeleted);
+        userRepository.save(user);
+        return newPokemon;
+    }
 }

@@ -82,4 +82,21 @@ public class PokemonService {
                 )
                 .toList();
     }
+
+    public boolean trainAttack(Long id) {
+        Attack attack = attackRepository.getAttackById(id);
+        Pokemon pokemon = attack.getPokemon();
+        if (pokemon.getHunger() > 7) {
+            return false;
+        }
+        attack.setDamage(attack.getDamage() + 3);
+        attackRepository.save(attack);
+        pokemon.setHunger(pokemon.getHunger() + 1);
+        pokemonRepository.save(pokemon);
+        return true;
+    }
+
+    public Pokemon getPokemonByAttackId(Long id) {
+        return attackRepository.getAttackById(id).getPokemon();
+    }
 }

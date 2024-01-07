@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AttackRepository extends JpaRepository<Attack, Long> {
+    Attack getAttackById(Long id);
 }

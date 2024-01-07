@@ -16,6 +16,8 @@
 <body>
 <div class="header">
     <h1 th:text="${pokemon.getName()}"></h1>
+    <h2 th:if="${trained} == true">Your pokemon was trained! His hunger was increased as well.</h2>
+    <h2 th:if="${trained} == false">Your pokemon is too hungry to be trained. Feed him first</h2>
     <div class="navigation">
         <span><a th:if="|${pokemon.getId() != pokemonList.get(0).getId()}|"
                  th:href="|/${pokemon.getId() - 1}/info|"><</a></span>
@@ -36,6 +38,7 @@
                 <p th:text="${attack.getName()}"></p>
                 <p th:text="${attack.getDescription()}"></p>
                 <p th:text="|Damage: ${attack.getDamage()}|"></p>
+                <a th:href="|/${attack.getId()}/train|">Train</a>
             </div>
         </div>
         <p th:text="|Experience: ${pokemon.getExperience()}|"></p>

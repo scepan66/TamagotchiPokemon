@@ -68,4 +68,14 @@ public class MainController {
         model.addAttribute("user", pokemonService.findUserByUsername(loggedInUser.getUsername()));
         return "pokedex";
     }
+
+    @GetMapping("/{id}/train")
+    public String train(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if (pokemonService.trainAttack(id)) {
+            redirectAttributes.addFlashAttribute("trained", true);
+        } else {
+            redirectAttributes.addFlashAttribute("trained", false);
+        }
+        return "redirect:/" + pokemonService.getPokemonByAttackId(id).getId() + "/info";
+    }
 }

@@ -10,7 +10,7 @@ public class Attack {
     private String name;
     private String description;
     private int damage;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "pokemon_id")
     private Pokemon pokemon;
 
@@ -64,6 +64,7 @@ public class Attack {
     public Pokemon getPokemonFromUser() {
         return pokemon;
     }
+
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }

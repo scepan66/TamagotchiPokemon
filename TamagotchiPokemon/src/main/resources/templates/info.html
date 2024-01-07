@@ -16,8 +16,13 @@
 <body>
 <div class="header">
     <h1 th:text="${pokemon.getName()}"></h1>
-    <h2 th:if="${trained} == true">Your pokemon was trained! His hunger was increased as well.</h2>
+    <h2 th:if="${trained} == true">Your pokemon was trained! His hunger and experience increased as well.</h2>
     <h2 th:if="${trained} == false">Your pokemon is too hungry to be trained. Feed him first</h2>
+    <h2 th:if="${fed} == true">Your pokemon was fed. Yummy!</h2>
+    <h2 th:if="${fed} == false">Your pokemon has already his belly full. You can't feed him more.</h2>
+    <h2 th:if="${pokemon.getExperience()} >= 50" th:text="|Your ${pokemon.getName()} can be evolved!|"></h2>
+    <a th:if="${pokemon.getExperience()} >= 50" th:href="|/${pokemon.getId()}/evolve|">Evolve</a>
+    <h2 th:if="${justEvolved} == true" th:text="|Your pokemon just evolved to ${pokemon.getName()}! Check his attacks and keep training to get him better!|"></h2>
     <div class="navigation">
         <span><a th:if="|${pokemon.getId() != pokemonList.get(0).getId()}|"
                  th:href="|/${pokemon.getId() - 1}/info|"><</a></span>
@@ -43,6 +48,7 @@
         </div>
         <p th:text="|Experience: ${pokemon.getExperience()}|"></p>
         <p th:text="|Hunger: ${pokemon.getHunger()}|"></p>
+        <a th:href="|/${pokemon.getId()}/feed|">Feed Pokemon</a>
     </div>
 </div>
 </body>

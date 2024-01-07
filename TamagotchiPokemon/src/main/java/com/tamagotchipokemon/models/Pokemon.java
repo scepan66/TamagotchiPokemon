@@ -16,9 +16,9 @@ public class Pokemon {
     private int experience;
     private int evolveStage;
     private int hunger;
-    @OneToMany(mappedBy = "pokemon")
+    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Attack> attacks;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -32,7 +32,19 @@ public class Pokemon {
         this.user = user;
     }
 
-    public Pokemon() {}
+    public Pokemon(String name, String image, int health, int experience, int evolveStage, int hunger, Set<Attack> attacks, User user) {
+        this.name = name;
+        this.image = image;
+        this.health = health;
+        this.experience = experience;
+        this.evolveStage = evolveStage;
+        this.hunger = hunger;
+        this.attacks = attacks;
+        this.user = user;
+    }
+
+    public Pokemon() {
+    }
 
     public Long getId() {
         return id;

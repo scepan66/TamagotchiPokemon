@@ -1,7 +1,5 @@
 package com.tamagotchipokemon.models.DTOs;
 
-import com.tamagotchipokemon.models.Attack;
-
 import java.util.Set;
 
 public class BasicPokemon {

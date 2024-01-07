@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pokemon.getName()}"></title>
+    <link rel="stylesheet" href="/styleinfo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Nunito+Sans:opsz@6..12&display=swap"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div class="header">
+    <h1 th:text="${pokemon.getName()}"></h1>
+    <div class="navigation">
+        <a href="/pokedex">Home</a>
+    </div>
+</div>
+<div class="container">
+    <div class="image">
+        <img th:src="|/${pokemon.getImage()}|" width="400" height="400" th:alt="${pokemon.getName()}">
+    </div>
+    <h2><a th:text="|${pokemon.getName()} can't evolve. Do you want to start over again from first evolution?'|" th:href="|/${pokemon.getId()}/startAgain|"></a></h2>
+</div>
+</body>
+</html>

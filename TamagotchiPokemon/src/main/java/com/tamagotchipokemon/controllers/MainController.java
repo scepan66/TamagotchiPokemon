@@ -28,6 +28,12 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        loggedInUser = null;
+        return "redirect:/";
+    }
+
     @GetMapping("/pokedex")
     public String pokedex(Model model) {
         if (loggedInUser == null) {

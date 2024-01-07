@@ -115,7 +115,7 @@ public class PokemonService {
     public boolean checkIfPokemonCanBeEvolved(Long id) {
         Pokemon pokemonToBeEvolved = pokemonRepository.getPokemonById(id);
         List<BasicPokemon> evolveTree = evolves.stream().filter(p -> p.getEvolveStage() == pokemonToBeEvolved.getEvolveStage()).toList();
-        if (pokemonToBeEvolved.getHealth() == evolveTree.get(evolveTree.size()-1).getHealth()) {
+        if (pokemonToBeEvolved.getHealth() == evolveTree.get(evolveTree.size() - 1).getHealth()) {
             return false;
         }
         return true;
@@ -125,7 +125,7 @@ public class PokemonService {
         Pokemon pokemonToBeEvolved = pokemonRepository.getPokemonById(id);
         User user = pokemonToBeEvolved.getUser();
         List<BasicPokemon> evolveTree = evolves.stream().filter(p -> p.getEvolveStage() == pokemonToBeEvolved.getEvolveStage()).toList();
-        BasicPokemon unsavedPokemon = evolveTree.stream().filter(p ->p.getHealth() > pokemonToBeEvolved.getHealth()).findFirst().get();
+        BasicPokemon unsavedPokemon = evolveTree.stream().filter(p -> p.getHealth() > pokemonToBeEvolved.getHealth()).findFirst().get();
         Pokemon newPokemon = new Pokemon(unsavedPokemon.getName(), unsavedPokemon.getImage(), unsavedPokemon.getHealth(), unsavedPokemon.getExperience(), unsavedPokemon.getEvolveStage(), unsavedPokemon.getHunger(), user);
         pokemonRepository.save(newPokemon);
         for (BasicAttack basicAttack : unsavedPokemon.getAttacks()) {
